@@ -1,13 +1,13 @@
 # Projekt12
-## Etap 1
+## Etap 1 Ekstrakcja pojedynczej opinii
 ### 1. Analiza struktury opinii w serwisie [Ceneo.pl((https://ceneo.pl)
 
 |Składowa|Selektor CSS|Nazwa zmiennej|Typ danych|
 |--------|------------|--------------|----------|
-|Opinia|div.js_product-review|oinion|obiekt bs4.element.Tag|
+|Opinia|div.js_product-review|opinion|obiekt bs4.element.Tag|
 |Id opinii|["data-entry-id"]|opinion_id|str|
 |Autor|span.user-post__author-name|author|str|
-|Rekomendacja|span.user-post__author-recomendation > em|recomendation|bool|
+|Rekomendacja|span.user-post__author-recomendation > em|recommendation|bool|
 |Liczba gwiazdek|span.user-post__score-count|stars|float|
 |Treść opinii|div.user-post__text|content|str|
 |Lista zalet|div.review-feature__col:has(> div[class*="positives"]) > div.review-feature__item|pros|list|
@@ -23,4 +23,15 @@
 - wyodrębnienie z kodu strony kodu pojedynczej opinii
 - pobranie do pojedycznych zmiennych poszczególnych składowych na podstawie selektorów 
 - obsługa błędów 
+- dobranie typów danych do wartości zmiennych
+
+## Etap 2 Ekstrakcja wszystkich opinii o produkcie z pojedynczej strony
+- zapis składowych pojedynczej opinii do słownika
+- zdefiniowanie listy do przechowywania wszystkich opinii o danym produkcie
+- dodanie pętli, która wykonuje operajcę ekstrakcji dla wszystkich opinii pobranych z pojedynczej strony
 - 
+
+## Etap 3 Ekstrakcja wszystkich opinii o produkcie ze wszystkich stron
+- dodanie pętli, która pobiera i analizuje kolejne strony z opiniami o produkcie 
+- dodanie możliwości podania kodu produktu " z klawiatury"
+- dodanie zapisu wszystkich opinii o produkcie do pliku .json
