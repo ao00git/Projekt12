@@ -29,16 +29,13 @@ selectors = {
         }
 
 extracted_opinions = []
-
 product_id = input("Podaj kod produktu: ")
 next_page = "https://www.ceneo.pl/{}#tab=reviews".format(product_id)
 
 while next_page:
 
     response = requests.get(next_page)
-
     page_dom = BeautifulSoup(response.text, "html.parser")
-
     opinions = page_dom.select("div.js_product-review")
     for opinion in opinions:
 
@@ -46,8 +43,6 @@ while next_page:
                             for key, args in selectors.items()}
 
         opinion_elements["opinion_id"] = opinion["data-entry-id"]
-    
-        opinion_id =  opinion["data-entry-id"]
         
         opinion_elements["recommendation"] = True if opinion_elements["recommendation"] == "Polecam" else False if opinion_elements["recommendation"] == "Nie polecam" else None
         opinion_elements["stars"] = (opinion_elements["stars"].split("/")[0]).replace(",",".")
@@ -63,4 +58,4 @@ while next_page:
     print(next_page)
 
 with open(f"./opinions/{product_id}.json", "w", encoding="UTF-8") as fp:
-    json.dump(opinion_elements, fp, indent = 4, ensure_ascii=False)
+    json.dump(extracted_opinions, fp, indent = 4, ensure_ascii=False)
